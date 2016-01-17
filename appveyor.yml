@@ -5,6 +5,7 @@ platform:
 environment:
   global:
     ICU4C_URL: http://downloads.sourceforge.net/project/icu/ICU4C
+    DATA_API_URL: http://apps.icu-project.org/datacustom/datacustom
   matrix:
     - ICU_MAJOR: 54
       ICU_MINOR: 1
@@ -20,23 +21,33 @@ environment:
       VS_VERSION: 2013
 
 init:
-  - SET VCVARSALL=C:\Program Files (x86)\Microsoft Visual Studio %VS_TOOLSET%.0\VC\vcvarsall.bat
   - SET PATH=C:\icu\bin;%PATH%
-
-build_script:
-  - cd C:\
+  - SET VCVARSALL=C:\Program Files (x86)\Microsoft Visual Studio %VS_TOOLSET%.0\VC\vcvarsall.bat
+  - SET REQUEST_XML=%APPVEYOR_BUILD_FOLDER%/data_request_%ICU_MAJOR%.xml
   - IF %platform% == x86 CALL "%VCVARSALL%" x86
   - IF %platform% == x64 CALL "%VCVARSALL%" amd64
+
+build_script:
+  # Download and extract.
+  - cd C:\
   - curl -L -O %ICU4C_URL%/%ICU_MAJOR%.%ICU_MINOR%/icu4c-%ICU_MAJOR%_%ICU_MINOR%-src.zip
   - 7z x icu4c-%ICU_MAJOR%_%ICU_MINOR%-src.zip
-  - cd icu\source\allinone
+  # Replace data with minimal data.
+  - cd C:\icu\source\data\in
+  - curl -o data_url.txt -X POST -d @%REQUEST_XML% %DATA_API_URL% --header "Content-Type: text/xml; charset=UTF-8"
+  - SET /p DATA_URL=<data_url.txt
+  - curl -O %DATA_URL%
+  - 7z x icudt%ICU_MAJOR%l.zip
+  # Build and check.
+  - cd C:\icu\source\allinone
   - IF %VS_VERSION% == 2012 vcexpress allinone.sln /Upgrade
   - IF %VS_VERSION% GTR 2012 devenv allinone.sln /Upgrade
   - IF %platform% == x86 msbuild allinone.sln /p:Configuration="Release" /p:Platform="Win32"
   - IF %platform% == x64 msbuild allinone.sln /p:Configuration="Release" /p:Platform="x64"
   - icucheck %platform% Release
-  - dir /s /b icu\bin
-  - dir /s /b icu\lib
+  # TODO: Create ZIP with DLLs.
+  - dir /s /b C:\icu\bin
+  - dir /s /b C:\icu\lib
 
 matrix:
   fast_finish: true
