@@ -30,9 +30,10 @@ build_script:
   - curl -L -O %ICU4C_URL%/%ICU_MAJOR%.%ICU_MINOR%/icu4c-%ICU_MAJOR%_%ICU_MINOR%-src.zip
   - 7z x icu4c-%ICU_MAJOR%_%ICU_MINOR%-src.zip
   - cd icu\source\allinone
-  - IF %VS_VERSION% GTR 2010 devenv allinone /Upgrade
-  - IF %platform% == x86 devenv allinone.sln /build "Win32|Release"
-  - IF %platform% == x64 devenv allinone.sln /build "x64|Release"
+  - IF %VS_VERSION% == 2012 vcexpress allinone.sln /Upgrade
+  - IF %VS_VERSION% GTR 2012 devenv allinone.sln /Upgrade
+  - IF %platform% == x86 msbuild allinone.sln /p:Configuration="Release" /p:Platform="Win32"
+  - IF %platform% == x64 msbuild allinone.sln /p:Configuration="Release" /p:Platform="x64"
   - icucheck %platform% Release
   - dir /s /b icu\bin
   - dir /s /b icu\lib
