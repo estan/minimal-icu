@@ -25,3 +25,6 @@ build_script:
   - curl -L -O http://downloads.sourceforge.net/project/icu/ICU4C/%icu_major%.%icu_minor/icu4c-%icu_major%_%icu_minor%-src.zip 
   - 7z x icu4c-%icu_version%_%icu_minor%-src.zip
   - bash runConfigureICU Cygwin/MSVC -prefix=/cygdrive/c/icu/dist
+
+matrix:
+  fast_finish: true
