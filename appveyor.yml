@@ -19,7 +19,7 @@ environment:
 
 build_script:
   - cd "%APPVEYOR_BUILD_FOLDER%"
-  - SET PATH=C:\cygwin\bin
+  - SET PATH=C:\cygwin\bin;%PATH%
   - IF %platform% == x86 CALL "C:\Program Files (x86)\Microsoft Visual Studio %vs_toolset%.0\VC\vcvarsall.bat" x86
   - IF %platform% == x64 CALL "C:\Program Files (x86)\Microsoft Visual Studio %vs_toolset%.0\VC\vcvarsall.bat" amd64
   - curl -L -O http://downloads.sourceforge.net/project/icu/ICU4C/%icu_major%.%icu_minor/icu4c-%icu_major%_%icu_minor%-src.zip 
