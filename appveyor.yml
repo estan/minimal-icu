@@ -28,7 +28,7 @@ build_script:
   - cd icu\source
   - dos2unix *
   - dos2unix -f configure
-  - bash runConfigureICU Cygwin/MSVC -prefix=/cygdrive/c/icu/dist
+  - exec 0</dev/null; bash runConfigureICU Cygwin/MSVC -prefix=/cygdrive/c/icu/dist
 
 matrix:
   fast_finish: true
