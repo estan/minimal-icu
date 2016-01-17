@@ -35,20 +35,21 @@ build_script:
   # Replace data with minimal data.
   - cd C:\icu\source\data\in
   - curl -o data_url.txt -X POST -d "@%REQUEST_XML%" --header "Content-Type: text/xml; charset=UTF-8" %DATA_API_URL%
-  - curl --help
-  - SET /p DATA_URL=<data_url.txt
-  - curl -O %DATA_URL%
-  - 7z x icudt%ICU_MAJOR%l.zip
+  - dir
+  - dir C:\icu\source\data\in
+#  - SET /p DATA_URL=<data_url.txt
+#  - curl -O %DATA_URL%
+#  - 7z x icudt%ICU_MAJOR%l.zip
   # Build and check.
-  - cd C:\icu\source\allinone
-  - IF %VS_VERSION% == 2012 vcexpress allinone.sln /Upgrade
-  - IF %VS_VERSION% GTR 2012 devenv allinone.sln /Upgrade
-  - IF %platform% == x86 msbuild allinone.sln /p:Configuration="Release" /p:Platform="Win32"
-  - IF %platform% == x64 msbuild allinone.sln /p:Configuration="Release" /p:Platform="x64"
-  - icucheck %platform% Release
+  #  - cd C:\icu\source\allinone
+  #  - IF %VS_VERSION% == 2012 vcexpress allinone.sln /Upgrade
+  #  - IF %VS_VERSION% GTR 2012 devenv allinone.sln /Upgrade
+  #  - IF %platform% == x86 msbuild allinone.sln /p:Configuration="Release" /p:Platform="Win32"
+  #  - IF %platform% == x64 msbuild allinone.sln /p:Configuration="Release" /p:Platform="x64"
+  #  - icucheck %platform% Release
   # TODO: Create ZIP with DLLs.
-  - dir /s /b C:\icu\bin
-  - dir /s /b C:\icu\lib
+  #  - dir /s /b C:\icu\bin
+  #  - dir /s /b C:\icu\lib
 
 #artifacts:
 #  path: icu-win-$(ICU_MAJOR).$(ICU_MINOR)-msvc$(VS_VERSION)-$(platform).zip
