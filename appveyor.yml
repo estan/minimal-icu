@@ -45,22 +45,22 @@ build_script:
   - IF %platform% == x86 msbuild allinone.sln /p:Configuration="Release" /p:Platform="Win32"
   - IF %platform% == x64 msbuild allinone.sln /p:Configuration="Release" /p:Platform="x64"
   #- icucheck %platform% Release
-  # TODO: Create ZIP with DLLs.
-  - dir /s /b C:\icu\bin
-  - dir /s /b C:\icu\lib
+  # Create ZIP with icudtXX.dll, icuinXX.dll and icuucXX.dll
+  - cd C:\icu\bin
+  - 7z a %APPVEYOR_BUILD_FOLDER%\icu-win-%ICU_MAJOR%.%ICU_MINOR%-msvc%VS_VERSION%-%platform%.zip icudt%ICU_MAJOR%.dll icuin%ICU_MAJOR%.dll icuuc%ICU_MAJOR%.dll
 
-#artifacts:
-#  path: icu-win-$(ICU_MAJOR).$(ICU_MINOR)-msvc$(VS_VERSION)-$(platform).zip
-#  name: icu-win-$(ICU_MAJOR).$(ICU_MINOR)-msvc$(VS_VERSION)-$(platform)
+artifacts:
+  path: icu-win-$(ICU_MAJOR).$(ICU_MINOR)-msvc$(VS_VERSION)-$(platform).zip
+  name: icu-win-$(ICU_MAJOR).$(ICU_MINOR)-msvc$(VS_VERSION)-$(platform)
 
-#deploy:
-#  release: icu-win-$(ICU_MAJOR).$(ICU_MINOR)-msvc$(VS_VERSION)-$(platform)
-#  description: 'Minimal ICU $(ICU_MAJOR).$(ICU_MINOR) DLLs, built with MSVC $(VS_VERSION) on $(platform)'
-#  provider: GitHub
-#  auth_token:
-#    secure: JUtSd7iVOXwTUe295uQ0AL+qf3QVGwvz04eq4avhsLWorhdND+1tIXQuq99TnFd9
-#  artifact: icu-win-$(ICU_MAJOR).$(ICU_MINOR)-msvc$(VS_VERSION)-$(platform)
-#  prerelease: false
+deploy:
+  release: icu-win-$(ICU_MAJOR).$(ICU_MINOR)-msvc$(VS_VERSION)-$(platform)
+  description: 'Minimal ICU $(ICU_MAJOR).$(ICU_MINOR) DLLs, built with MSVC $(VS_VERSION) on $(platform)'
+  provider: GitHub
+  auth_token:
+    secure: JUtSd7iVOXwTUe295uQ0AL+qf3QVGwvz04eq4avhsLWorhdND+1tIXQuq99TnFd9
+  artifact: icu-win-$(ICU_MAJOR).$(ICU_MINOR)-msvc$(VS_VERSION)-$(platform)
+  prerelease: false
 
 matrix:
   fast_finish: true
