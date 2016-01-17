@@ -24,7 +24,10 @@ build_script:
   - IF %platform% == x86 CALL "%VCVARSALL%" x86
   - IF %platform% == x64 CALL "%VCVARSALL%" amd64
   - curl -L -O http://downloads.sourceforge.net/project/icu/ICU4C/%icu_major%.%icu_minor%/icu4c-%icu_major%_%icu_minor%-src.zip
-  - 7z x icu4c-%icu_version%_%icu_minor%-src.zip
+  - 7z x icu4c-%icu_major%_%icu_minor%-src.zip
+  - cd icu\source
+  - dos2unix *
+  - dos2unix -f configure
   - bash runConfigureICU Cygwin/MSVC -prefix=/cygdrive/c/icu/dist
 
 matrix:
