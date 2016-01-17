@@ -34,7 +34,7 @@ build_script:
   - 7z x icu4c-%ICU_MAJOR%_%ICU_MINOR%-src.zip
   # Replace data with minimal data.
   - cd C:\icu\source\data\in
-  - curl -o data_url.txt -X POST -d "@%REQUEST_XML%" --header "Content-Type: text/xml; charset=UTF-8" %DATA_API_URL% 
+  - curl -o data_url.txt -X POST -d "@%REQUEST_XML%" --header "Content-Type: text/xml; charset=UTF-8" %DATA_API_URL%
   - curl --help
   - SET /p DATA_URL=<data_url.txt
   - curl -O %DATA_URL%
