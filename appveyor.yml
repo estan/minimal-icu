@@ -7,23 +7,25 @@ environment:
     ICU4C_URL: http://downloads.sourceforge.net/project/icu/ICU4C
     DATA_API_URL: http://apps.icu-project.org/datacustom/datacustom
   matrix:
-    - ICU_MAJOR: 54
-      ICU_MINOR: 1
-      VS_TOOLSET: 10
-      VS_VERSION: 2010
+    #- ICU_MAJOR: 54
+    #  ICU_MINOR: 1
+    #  VS_TOOLSET: 10
+    #  VS_VERSION: 2010
     - ICU_MAJOR: 54
       ICU_MINOR: 1
       VS_TOOLSET: 11
       VS_VERSION: 2012
-    - ICU_MAJOR: 54
-      ICU_MINOR: 1
-      VS_TOOLSET: 12
-      VS_VERSION: 2013
+    #- ICU_MAJOR: 54
+    #  ICU_MINOR: 1
+    #  VS_TOOLSET: 12
+    #  VS_VERSION: 2013
 
 init:
   - SET PATH=C:\icu\bin;%PATH%
   - SET REQUEST_XML=%APPVEYOR_BUILD_FOLDER%/data_request_%ICU_MAJOR%.xml
-  - CALL "C:\Program Files\Microsoft SDKs\Windows\v7.1\Bin\SetEnv.cmd" /%platform%
+  - IF %VS_VERSION% == 2010 CALL "C:\Program Files\Microsoft SDKs\Windows\v7.1\Bin\SetEnv.cmd" /%platform% /Release
+  - IF %VS_VERSION% GTR 2010 IF %platform% == x86 CALL "C:\Program Files (x86)\Microsoft Visual Studio %VS_TOOLSET%.0\VC\vcvarsall.bat" x86
+  - IF %VS_VERSION% GTR 2010 IF %platform% == x64 CALL "C:\Program Files (x86)\Microsoft Visual Studio %VS_TOOLSET%.0\VC\vcvarsall.bat" x86_amd64
 
 build_script:
   # Download and extract.
@@ -49,16 +51,16 @@ build_script:
   - 7z a %APPVEYOR_BUILD_FOLDER%\icu-win-%ICU_MAJOR%.%ICU_MINOR%-msvc%VS_VERSION%-%platform%.zip icudt%ICU_MAJOR%.dll icuin%ICU_MAJOR%.dll icuuc%ICU_MAJOR%.dll
 
 artifacts:
-  path: icu-win-$(ICU_MAJOR).$(ICU_MINOR)-msvc$(VS_VERSION)-$(platform).zip
-  name: icu-win-$(ICU_MAJOR).$(ICU_MINOR)-msvc$(VS_VERSION)-$(platform)
+  path: minimal-icu-$(ICU_MAJOR).$(ICU_MINOR)-msvc$(VS_VERSION)-$(platform).zip
+  name: minimal-icu-$(ICU_MAJOR).$(ICU_MINOR)-msvc$(VS_VERSION)-$(platform)
 
 deploy:
-  release: icu-win-$(ICU_MAJOR).$(ICU_MINOR)-msvc$(VS_VERSION)-$(platform)
-  description: 'Minimal ICU $(ICU_MAJOR).$(ICU_MINOR) DLLs, built with MSVC $(VS_VERSION) on $(platform)'
+  release: minimal-icu-$(ICU_MAJOR).$(ICU_MINOR)
+  description: 'Minimal ICU $(ICU_MAJOR).$(ICU_MINOR) DLLs'
   provider: GitHub
   auth_token:
     secure: JUtSd7iVOXwTUe295uQ0AL+qf3QVGwvz04eq4avhsLWorhdND+1tIXQuq99TnFd9
-  artifact: icu-win-$(ICU_MAJOR).$(ICU_MINOR)-msvc$(VS_VERSION)-$(platform)
+  artifact: minimal-icu-$(ICU_MAJOR).$(ICU_MINOR)-msvc$(VS_VERSION)-$(platform)
   prerelease: false
 
 matrix:
