@@ -44,7 +44,8 @@ build_script:
   - IF %platform% == x64 msbuild allinone.sln /p:Configuration="Release" /p:Platform="x64"
   #- icucheck %platform% Release
   # Create ZIP with icudtXX.dll, icuinXX.dll and icuucXX.dll
-  - cd C:\icu\bin
+  - IF %platform% == x86 cd C:\icu\bin
+  - IF %platform% == x64 cd C:\icu\bin64
   - 7z a %APPVEYOR_BUILD_FOLDER%\icu-win-%ICU_MAJOR%.%ICU_MINOR%-msvc%VS_VERSION%-%platform%.zip icudt%ICU_MAJOR%.dll icuin%ICU_MAJOR%.dll icuuc%ICU_MAJOR%.dll
 
 artifacts:
