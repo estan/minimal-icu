@@ -22,10 +22,8 @@ environment:
 
 init:
   - SET PATH=C:\icu\bin;%PATH%
-  - SET VCVARSALL=C:\Program Files (x86)\Microsoft Visual Studio %VS_TOOLSET%.0\VC\vcvarsall.bat
   - SET REQUEST_XML=%APPVEYOR_BUILD_FOLDER%/data_request_%ICU_MAJOR%.xml
-  - IF %platform% == x86 CALL "%VCVARSALL%" x86
-  - IF %platform% == x64 CALL "%VCVARSALL%" x86_amd64
+  - CALL "C:\Program Files\Microsoft SDKs\Windows\v7.1\Bin\SetEnv.cmd" /%platform%
 
 build_script:
   # Download and extract.
