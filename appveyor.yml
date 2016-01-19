@@ -45,7 +45,7 @@ build_script:
   # Create ZIP with icudtXX.dll, icuinXX.dll and icuucXX.dll
   - IF %platform% == x86 cd C:\icu\bin
   - IF %platform% == x64 cd C:\icu\bin64
-  - 7z a %APPVEYOR_BUILD_FOLDER%\icu-win-%ICU_MAJOR%.%ICU_MINOR%-msvc%VS_VERSION%-%platform%.zip icudt%ICU_MAJOR%.dll icuin%ICU_MAJOR%.dll icuuc%ICU_MAJOR%.dll
+  - 7z a %APPVEYOR_BUILD_FOLDER%\minimal-icu-%ICU_MAJOR%.%ICU_MINOR%-msvc%VS_VERSION%-%platform%.zip icudt%ICU_MAJOR%.dll icuin%ICU_MAJOR%.dll icuuc%ICU_MAJOR%.dll
 
 artifacts:
   path: minimal-icu-$(ICU_MAJOR).$(ICU_MINOR)-msvc$(VS_VERSION)-$(platform).zip
