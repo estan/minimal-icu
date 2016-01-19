@@ -1,0 +1,14 @@
+<package>
+    <type>
+        <version>51</version>
+        <target>ICU4C</target>
+    </type>
+    <items>
+        <item name="cnvalias.icu"/>
+        <item name="confusables.cfu"/>
+        <item name="nfc.nrm"/>
+        <item name="nfkc.nrm"/>
+        <item name="nfkc_cf.nrm"/>
+        <item name="uts46.nrm"/>
+    </items>
+</package>
