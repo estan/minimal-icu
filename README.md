@@ -1,7 +1,7 @@
 # Windows Builds of ICU with Minimal Data
 
 These are 32 and 64 bit builds of various versions of ICU using MSVC 2010 and
-2013. The library is built on the [Appveyor CI][appveyor]. Downloads are
+2013. The library is built on the [Appveyor CI][appveyor-ci]. Downloads are
 available as ZIP files attached to [releases][releases] here at GitHub. Only
 the `icudtXX.dll`, `icuinXX.dll`, `icuucXX.dll`, which are the ones required
 when deploying Qt applications.
