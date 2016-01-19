@@ -13,20 +13,17 @@ environment:
     #  VS_VERSION: 2010
     - ICU_MAJOR: 54
       ICU_MINOR: 1
-      VS_TOOLSET: 11
-      VS_VERSION: 2012
-    #- ICU_MAJOR: 54
-    #  ICU_MINOR: 1
-    #  VS_TOOLSET: 12
-    #  VS_VERSION: 2013
+      VS_TOOLSET: 12
+      VS_VERSION: 2013
 
 init:
   - SET PATH=C:\icu\bin;%PATH%
   - SET REQUEST_XML=%APPVEYOR_BUILD_FOLDER%/data_request_%ICU_MAJOR%.xml
-  - IF %VS_VERSION% == 2010 CALL "C:\Program Files\Microsoft SDKs\Windows\v7.1\Bin\SetEnv.cmd" /%platform% /Release
-  - IF %VS_VERSION% GTR 2010 IF %platform% == x86 CALL "C:\Program Files (x86)\Microsoft Visual Studio %VS_TOOLSET%.0\VC\vcvarsall.bat" x86
-  - IF %VS_VERSION% GTR 2010 IF %platform% == x64 CALL "C:\Program Files (x86)\Microsoft Visual Studio %VS_TOOLSET%.0\VC\vcvarsall.bat" x86_amd64
-  - IF %VS_VERSION% == 2012 SET VisualStudioVersion=11.0
+  - SET VCVARSALL=C:\Program Files (x86)\Microsoft Visual Studio %VS_TOOLSET%.0\VC\vcvarsall.bat
+  - SET SETENV=C:\Program Files\Microsoft SDKs\Windows\v7.1\Bin\SetEnv.cmd
+  - IF %VS_VERSION% == 2010 CALL "%SETENV%" /%platform% /Release
+  - IF %VS_VERSION% GTR 2010 IF %platform% == x86 CALL "%VCVARSALL%" x86
+  - IF %VS_VERSION% GTR 2010 IF %platform% == x64 CALL "%VCVARSALL%" x86_amd64
 
 build_script:
   # Download and extract.
@@ -41,8 +38,7 @@ build_script:
   - 7z x icudt%ICU_MAJOR%l.zip -aoa
   # Build and check.
   - cd C:\icu\source\allinone
-  #- IF %VS_VERSION% == 2012 wdexpress allinone.sln /Upgrade
-  - IF %VS_VERSION% GTR 2012 devenv allinone.sln /Upgrade
+  - IF %VS_VERSION% GTR 2010 devenv allinone.sln /Upgrade
   - IF %platform% == x86 msbuild allinone.sln /p:Configuration="Release" /p:Platform="Win32"
   - IF %platform% == x64 msbuild allinone.sln /p:Configuration="Release" /p:Platform="x64"
   #- icucheck %platform% Release
