@@ -6,6 +6,8 @@ available as ZIP files attached to [releases][releases] here at GitHub. Only
 the `icudtXX.dll`, `icuinXX.dll`, `icuucXX.dll` are included. These are the
 ones required when deploying Qt applications.
 
+The ICU versions were picked to match those used by official Qt builds.
+
 [appveyor-ci]:
     https://ci.appveyor.com/project/estan/minimal-icu
     "minimal-icu at Appveyor CI"
