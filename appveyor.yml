@@ -42,8 +42,10 @@ build_script:
   - cd C:\icu\source\allinone
   #- IF %VS_VERSION% == 2012 wdexpress allinone.sln /Upgrade
   - IF %VS_VERSION% GTR 2012 devenv allinone.sln /Upgrade
-  - IF %platform% == x86 msbuild allinone.sln /p:Configuration="Release" /p:Platform="Win32"
-  - IF %platform% == x64 msbuild allinone.sln /p:Configuration="Release" /p:Platform="x64"
+  - IF %VS_VERSION% == 2012 IF %platform% == x86 msbuild allinone.sln /p:Configuration="Release" /p:Platform="Win32" /p:VisualStudioVersion=11.0
+  - IF %VS_VERSION% == 2012 IF %platform% == x64 msbuild allinone.sln /p:Configuration="Release" /p:Platform="x64" /p:VisualStudioVersion=11.0
+  - IF %VS_VERSION% != 2012 %platform% == x86 msbuild allinone.sln /p:Configuration="Release" /p:Platform="Win32"
+  - IF %VS_VERSION% != 2012 %platform% == x64 msbuild allinone.sln /p:Configuration="Release" /p:Platform="x64"
   #- icucheck %platform% Release
   # Create ZIP with icudtXX.dll, icuinXX.dll and icuucXX.dll
   - IF %platform% == x86 cd C:\icu\bin
