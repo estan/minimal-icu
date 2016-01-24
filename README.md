@@ -10,7 +10,7 @@ are the ones required when deploying Qt applications.
 
 The ICU versions were picked to match those used by official Qt builds.
 
-## Note to Self: Add New ICU Version
+## Note to Self
 
 When a new version XY.Z of ICU is needed, do the following:
 
