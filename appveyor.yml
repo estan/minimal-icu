@@ -7,18 +7,18 @@ environment:
     ICU4C_URL: http://downloads.sourceforge.net/project/icu/ICU4C
     DATA_API_URL: http://apps.icu-project.org/datacustom/datacustom
   matrix:
-    - ICU_MAJOR: 52
-      ICU_MINOR: 1
-      VS_TOOLSET: 10
-      VS_VERSION: 2010
+#    - ICU_MAJOR: 52
+#      ICU_MINOR: 1
+#      VS_TOOLSET: 10
+#      VS_VERSION: 2010
 #    - ICU_MAJOR: 52
 #      ICU_MINOR: 1
 #      VS_TOOLSET: 12
 #      VS_VERSION: 2013
-#    - ICU_MAJOR: 53
-#      ICU_MINOR: 1
-#      VS_TOOLSET: 10
-#      VS_VERSION: 2010
+    - ICU_MAJOR: 53
+      ICU_MINOR: 1
+      VS_TOOLSET: 10
+      VS_VERSION: 2010
 #    - ICU_MAJOR: 53
 #      ICU_MINOR: 1
 #      VS_TOOLSET: 12
@@ -42,7 +42,7 @@ init:
   - IF %VS_VERSION% GTR 2010 IF %platform% == x64 CALL "%VCVARSALL%" x86_amd64
 
 build_script:
-  # Download and extract.
+  # Download and extract ICU.
   - cd C:\
   - curl -L -O %ICU4C_URL%/%ICU_MAJOR%.%ICU_MINOR%/icu4c-%ICU_MAJOR%_%ICU_MINOR%-src.zip
   - 7z x icu4c-%ICU_MAJOR%_%ICU_MINOR%-src.zip
@@ -52,12 +52,12 @@ build_script:
   - SET /p DATA_URL=<data_url.txt
   - curl -O %DATA_URL%
   - 7z x icudt%ICU_MAJOR%l.zip -aoa
-  # Build and check.
+  # Build ICU.
   - cd C:\icu\source\allinone
   - IF %VS_VERSION% GTR 2010 devenv allinone.sln /Upgrade
   - IF %platform% == x86 msbuild allinone.sln /p:Configuration="Release" /p:Platform="Win32"
   - IF %platform% == x64 msbuild allinone.sln /p:Configuration="Release" /p:Platform="x64"
-  # Create ZIP with icudtXX.dll, icuinXX.dll and icuucXX.dll
+  # Create ZIP with icudtXY.dll, icuinXY.dll and icuucXY.dll
   - IF %platform% == x86 cd C:\icu\bin
   - IF %platform% == x64 cd C:\icu\bin64
   - 7z a %APPVEYOR_BUILD_FOLDER%\minimal-icu-%ICU_MAJOR%.%ICU_MINOR%-msvc%VS_VERSION%-%platform%.zip icudt%ICU_MAJOR%.dll icuin%ICU_MAJOR%.dll icuuc%ICU_MAJOR%.dll
@@ -74,6 +74,3 @@ deploy:
     secure: JUtSd7iVOXwTUe295uQ0AL+qf3QVGwvz04eq4avhsLWorhdND+1tIXQuq99TnFd9
   artifact: minimal-icu-$(ICU_MAJOR).$(ICU_MINOR)-msvc$(VS_VERSION)-$(platform)
   prerelease: false
-
-matrix:
-  fast_finish: true
