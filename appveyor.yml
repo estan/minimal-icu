@@ -7,26 +7,26 @@ environment:
     ICU4C_URL: http://downloads.sourceforge.net/project/icu/ICU4C
     DATA_API_URL: http://apps.icu-project.org/datacustom/datacustom
   matrix:
-#    - ICU_MAJOR: 52
-#      ICU_MINOR: 1
-#      VS_TOOLSET: 10
-#      VS_VERSION: 2010
-#    - ICU_MAJOR: 52
-#      ICU_MINOR: 1
-#      VS_TOOLSET: 12
-#      VS_VERSION: 2013
-#    - ICU_MAJOR: 53
-#      ICU_MINOR: 1
-#      VS_TOOLSET: 10
-#      VS_VERSION: 2010
-#    - ICU_MAJOR: 53
-#      ICU_MINOR: 1
-#      VS_TOOLSET: 12
-#      VS_VERSION: 2013
-    - ICU_MAJOR: 54
+    - ICU_MAJOR: 52
       ICU_MINOR: 1
       VS_TOOLSET: 10
       VS_VERSION: 2010
+#    - ICU_MAJOR: 52
+#      ICU_MINOR: 1
+#      VS_TOOLSET: 12
+#      VS_VERSION: 2013
+#    - ICU_MAJOR: 53
+#      ICU_MINOR: 1
+#      VS_TOOLSET: 10
+#      VS_VERSION: 2010
+#    - ICU_MAJOR: 53
+#      ICU_MINOR: 1
+#      VS_TOOLSET: 12
+#      VS_VERSION: 2013
+#    - ICU_MAJOR: 54
+#      ICU_MINOR: 1
+#      VS_TOOLSET: 10
+#      VS_VERSION: 2010
 #    - ICU_MAJOR: 54
 #      ICU_MINOR: 1
 #      VS_TOOLSET: 12
@@ -55,8 +55,8 @@ build_script:
   # Build and check.
   - cd C:\icu\source\allinone
   - IF %VS_VERSION% GTR 2010 devenv allinone.sln /Upgrade
-  - IF %platform% == x86 msbuild allinone.sln /p:Configuration="Release" /p:Platform="Win32"
-  - IF %platform% == x64 msbuild allinone.sln /p:Configuration="Release" /p:Platform="x64"
+  - IF %platform% == x86 msbuild allinone.sln /t:common;stubdata;i18n /p:Configuration="Release" /p:Platform="Win32" /p:BuildProjectReferences=false
+  - IF %platform% == x64 msbuild allinone.sln /t:common;stubdata;i18n /p:Configuration="Release" /p:Platform="x64" /p:BuildProjectReferences=false
   # Create ZIP with icudtXX.dll, icuinXX.dll and icuucXX.dll
   - IF %platform% == x86 cd C:\icu\bin
   - IF %platform% == x64 cd C:\icu\bin64
