@@ -4,6 +4,7 @@
         <target>ICU4C</target>
     </type>
     <items>
+        <item name="coll/invuca.icu"/>
         <item name="coll/ucadata.icu"/>
         <item name="cnvalias.icu"/>
         <item name="confusables.cfu"/>
