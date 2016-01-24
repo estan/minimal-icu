@@ -32,6 +32,8 @@ environment:
       VS_TOOLSET: 12
       VS_VERSION: 2013
 
+skip_tags: true
+
 init:
   - SET PATH=C:\icu\bin;%PATH%
   - SET REQUEST_XML=%APPVEYOR_BUILD_FOLDER%/data_request_%ICU_MAJOR%.xml
