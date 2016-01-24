@@ -24,6 +24,8 @@ When a new version XY.Z of ICU is needed, do the following:
 * `git commit -a`
 * `git push`
 
+Here's a [handy link][tools-and-versions] to tools and versions used by Qt.
+
 
 [appveyor-ci]:
     https://ci.appveyor.com/project/estan/minimal-icu
@@ -40,3 +42,7 @@ When a new version XY.Z of ICU is needed, do the following:
 [datacustom]:
     http://apps.icu-project.org/datacustom/
     "ICU Data Library Customizer"
+
+[tools-and-versions]:
+    https://wiki.qt.io/index.php?title=Special%3ASearch&search="tools-and-versions"
+    "Tools and versions at the Qt wiki"
