@@ -1,5 +1,7 @@
 # Windows Builds of ICU with Minimal Data
 
+[![Appveyor Build Status][appveyor-svg]][appveyor-ci]
+
 These are 32 and 64 bit builds of various versions of ICU using MSVC 2010 and
 2013. The library is built on the [Appveyor CI][appveyor-ci]. Downloads are
 available as ZIP files attached to [releases][releases] here at GitHub. Only
@@ -26,6 +28,10 @@ happens, add the missing files back in and try again.
 [appveyor-ci]:
     https://ci.appveyor.com/project/estan/minimal-icu
     "minimal-icu at Appveyor CI"
+
+[appveyor-svg]:
+    https://ci.appveyor.com/api/projects/status/fgaav9amr62m6bya?svg=true
+    "Appveyor CI build status SVG"
 
 [releases]:
     https://github.com/estan/minimal-icu/releases
