@@ -38,7 +38,7 @@ cache:
   - C:\icu4c-%ICU_MAJOR%_%ICU_MINOR%-src.zip
 
 init:
-  - SET PATH=C:\icu\bin;C:\Program Files (x86)\MSBuild\%VS_TOOLSET%\Bin;%PATH%
+  - SET PATH=C:\icu\bin;%PATH%
   - SET REQUEST_XML=%APPVEYOR_BUILD_FOLDER%/data_request_%ICU_MAJOR%.xml
   - SET VCVARSALL=C:\Program Files (x86)\Microsoft Visual Studio %VS_TOOLSET%.0\VC\vcvarsall.bat
   - SET SETENV=C:\Program Files\Microsoft SDKs\Windows\v7.1\Bin\SetEnv.cmd
