@@ -71,8 +71,8 @@ build_script:
   # Build ICU.
   - cd C:\icu\source\allinone
   - IF %VS_VERSION% GTR 2010 devenv allinone.sln /Upgrade
-  - IF %platform% == x86 msbuild allinone.sln /p:Configuration="Release" /p:Platform="Win32" /p:PlatformToolset="%VS_TOOLSET%0.0"
-  - IF %platform% == x64 msbuild allinone.sln /p:Configuration="Release" /p:Platform="x64" /p:PlatformToolset="%VS_TOOLSET%0.0"
+  - IF %platform% == x86 msbuild allinone.sln /p:Configuration="Release" /p:Platform="Win32" /p:PlatformToolset="v%VS_TOOLSET%0"
+  - IF %platform% == x64 msbuild allinone.sln /p:Configuration="Release" /p:Platform="x64" /p:PlatformToolset="v%VS_TOOLSET%0"
   # Create ZIP with icudtXY.dll, icuinXY.dll and icuucXY.dll
   - IF %platform% == x86 cd C:\icu\bin
   - IF %platform% == x64 cd C:\icu\bin64
