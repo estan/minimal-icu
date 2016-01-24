@@ -55,8 +55,8 @@ build_script:
   # Build and check.
   - cd C:\icu\source\allinone
   - IF %VS_VERSION% GTR 2010 devenv allinone.sln /Upgrade
-  - IF %platform% == x86 msbuild allinone.sln /t:common;stubdata;i18n /p:Configuration="Release" /p:Platform="Win32" /p:BuildProjectReferences=false
-  - IF %platform% == x64 msbuild allinone.sln /t:common;stubdata;i18n /p:Configuration="Release" /p:Platform="x64" /p:BuildProjectReferences=false
+  - IF %platform% == x86 msbuild allinone.sln /p:Configuration="Release" /p:Platform="Win32"
+  - IF %platform% == x64 msbuild allinone.sln /p:Configuration="Release" /p:Platform="x64"
   # Create ZIP with icudtXX.dll, icuinXX.dll and icuucXX.dll
   - IF %platform% == x86 cd C:\icu\bin
   - IF %platform% == x64 cd C:\icu\bin64
