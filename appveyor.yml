@@ -9,42 +9,30 @@ environment:
     ICU4C_URL: http://downloads.sourceforge.net/project/icu/ICU4C
     DATA_API_URL: http://apps.icu-project.org/datacustom/datacustom
   matrix:
-#    - ICU_MAJOR: 52
-#      ICU_MINOR: 1
-#      VS_TOOLSET: 10
-#      VS_VERSION: 2010
-#    - ICU_MAJOR: 52
-#      ICU_MINOR: 1
-#      VS_TOOLSET: 12
-#      VS_VERSION: 2013
-#    - ICU_MAJOR: 52
-#      ICU_MINOR: 1
-#      VS_TOOLSET: 14
-#      VS_VERSION: 2015
-#    - ICU_MAJOR: 53
-#      ICU_MINOR: 1
-#      VS_TOOLSET: 10
-#      VS_VERSION: 2010
-#    - ICU_MAJOR: 53
-#      ICU_MINOR: 1
-#      VS_TOOLSET: 12
-#      VS_VERSION: 2013
+    - ICU_MAJOR: 52
+      ICU_MINOR: 1
+      VS_TOOLSET: 10
+      VS_VERSION: 2010
+    - ICU_MAJOR: 52
+      ICU_MINOR: 1
+      VS_TOOLSET: 12
+      VS_VERSION: 2013
     - ICU_MAJOR: 53
       ICU_MINOR: 1
-      VS_TOOLSET: 14
-      VS_VERSION: 2015
-#    - ICU_MAJOR: 54
-#      ICU_MINOR: 1
-#      VS_TOOLSET: 10
-#      VS_VERSION: 2010
-#    - ICU_MAJOR: 54
-#      ICU_MINOR: 1
-#      VS_TOOLSET: 12
-#      VS_VERSION: 2013
-#    - ICU_MAJOR: 54
-#      ICU_MINOR: 1
-#      VS_TOOLSET: 14
-#      VS_VERSION: 2015
+      VS_TOOLSET: 10
+      VS_VERSION: 2010
+    - ICU_MAJOR: 53
+      ICU_MINOR: 1
+      VS_TOOLSET: 12
+      VS_VERSION: 2013
+    - ICU_MAJOR: 54
+      ICU_MINOR: 1
+      VS_TOOLSET: 10
+      VS_VERSION: 2010
+    - ICU_MAJOR: 54
+      ICU_MINOR: 1
+      VS_TOOLSET: 12
+      VS_VERSION: 2013
 
 skip_tags: true
 
