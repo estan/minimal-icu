@@ -20,10 +20,10 @@ When a new version XY.Z of ICU is needed, do the following:
 * Click "Get Data Library".
 * Save XML sent in the POST request as `data_request_XY.xml`.
 * Add entries for MSVC 2010 / 2013 to matrix in `appveyor.yml`.
-* `git commit && git push`
+* `git add data_request_XY.xml`
+* `git commit -a`
+* `git push`
 
-The building of the test data may fail due to missing data files. If this
-happens, add the missing files back in and try again.
 
 [appveyor-ci]:
     https://ci.appveyor.com/project/estan/minimal-icu
